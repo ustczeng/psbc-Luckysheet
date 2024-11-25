@@ -1100,7 +1100,8 @@ const dataVerificationCtrl = {
         }
         
         //数据验证未通过
-        let cellValue = getcellvalue(r, c, null);
+        // let cellValue = getcellvalue(r, c, null);
+        let cellValue = getcellvalue(r, c, null,item.type=="date"?"m":"v"); //特殊情况，字段类型为date时，type取'm'显示值 modify by luyaqin
 
         if(isRealNull(cellValue)){
             return;

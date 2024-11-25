@@ -35,7 +35,8 @@ const cellDatePickerCtrl = {
 
         let margeset = menuButton.mergeborer(Store.flowdata, r, c);
         let type = cell.ct.fa || 'YYYY-MM-DD';
-        let defaultDate = update('yyyy-MM-dd hh:mm:ss', cell.v);
+        // let defaultDate = update('yyyy-MM-dd hh:mm:ss', cell.v);
+        let defaultDate = update('yyyy-MM-dd hh:mm:ss', cell.v?cell.v:new Date());//如单元格没有值，日历控件默认选中当天 modify by luyaqin
         let dateFormat = fitFormat(type);
         let enableTime = false;
         let noCalendar = false;
