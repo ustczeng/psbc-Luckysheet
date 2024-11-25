@@ -73,6 +73,8 @@ luckysheet.create = function (setting) {
     Store.limitSheetNameLength = extendsetting.limitSheetNameLength;
     Store.defaultSheetNameMaxLength = extendsetting.defaultSheetNameMaxLength;
     Store.fontList = extendsetting.fontList;
+    Store.disabledEditCellBackgroundColor = extendsetting.disabledEditCellBackgroundColor;//禁止编辑单元格的颜色modify by luyaqin
+    
     server.gridKey = extendsetting.gridKey;
     server.loadUrl = extendsetting.loadUrl;
     server.updateUrl = extendsetting.updateUrl;

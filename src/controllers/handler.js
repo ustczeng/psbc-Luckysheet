@@ -70,6 +70,7 @@ import Store from "../store";
 import { createLuckyChart, hideAllNeedRangeShow } from "../expendPlugins/chart/plugin";
 import luckysheetformula from "../global/formula";
 import {createExportDialog,fetchAndDownloadXlsx} from "../expendPlugins/exportXlsx/plugin";
+import { getRangeValue } from "../global/api";
 
 //, columeflowset, rowflowset
 export default function luckysheetHandler() {
@@ -1567,6 +1568,17 @@ export default function luckysheetHandler() {
             if (!Store.allowEdit) {
                 return;
             }
+
+            //根据单元格背景色，判断是否禁止单元格编辑 modify by luyaqin start=====
+            const rangeValue = getRangeValue()[0][0];
+            if(rangeValue != null) {
+                console.info("rangeValue",getRangeValue())
+                console.info("disabledEditCellBackgroundColor",Store)
+                if(Store.disabledEditCellBackgroundColor.includes(rangeValue.bg)) {
+                    return;
+                }
+            }
+            //根据单元格背景色，判断是否禁止单元格编辑 end===
 
             if (parseInt($("#luckysheet-input-box").css("top")) > 0) {
                 return;

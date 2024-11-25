@@ -30,6 +30,7 @@ import tooltip from '../global/tooltip';
 import locale from '../locale/locale';
 import {enterKeyControll} from './inlineString';
 import Store from '../store';
+import { getRangeValue } from "../global/api";
 
 
 let luckysheet_shiftkeydown = false;
@@ -271,6 +272,14 @@ export function keyboardInitial(){
     $("#luckysheet-input-box").click(function () {
         formula.rangeHightlightselected($("#luckysheet-rich-text-editor"));
     }).add("#" + Store.container).on("keydown", function (event) {
+        // 根据单元格背景色，判断是否禁止单元格编辑 modify by luyaqin start===== 
+        const rangeValue = getRangeValue()[0][0];
+        if(rangeValue != null) {
+            if(Store.disabledEditCellBackgroundColor.includes(rangeValue.bg)) {
+                return;
+            }
+        }
+        //根据单元格背景色，判断是否禁止单元格编辑 end===
         let ctrlKey = event.ctrlKey;
         let altKey = event.altKey;
         let shiftKey = event.shiftKey;
