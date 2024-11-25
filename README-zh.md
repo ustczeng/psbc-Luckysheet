@@ -6,6 +6,8 @@
 
 简体中文 | [English](./README.md)
 
+extension by zengyiqi
+
 # Luckysheet 已不再维护，推荐使用 [Univer](https://github.com/dream-num/univer) 替代
 
 点击 [#1454](https://github.com/dream-num/Luckysheet/issues/1454) 查看更多详情。
