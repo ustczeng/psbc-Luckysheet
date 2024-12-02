@@ -87,11 +87,17 @@ export default function luckysheetscrollevent(isadjust) {
     
     $t.scrollLeft(scrollLeft).scrollTop(scrollTop);
 
-    $("#luckysheet-input-box-index").css({
-        "left": $("#luckysheet-input-box").css("left"), 
-        "top": (parseInt($("#luckysheet-input-box").css("top")) - 20) + "px", 
-        "z-index": $("#luckysheet-input-box").css("z-index")
-    }).show();
+     //modify by luyaqin start==
+    // $("#luckysheet-input-box-index").css({
+    //     "left": $("#luckysheet-input-box").css("left"), 
+    //     "top": (parseInt($("#luckysheet-input-box").css("top")) - 20) + "px", 
+    //     "z-index": $("#luckysheet-input-box").css("z-index")
+    // }).show();
+    $("#luckysheet-input-box").removeAttr("style"); // add
+    $(".flatpickr-calendar.open").css("display","none"); // add
+    $("#luckysheet-rightclick-menu").css("display","none"); // add
+    $("#luckysheet-dataVerification-dropdown-List").css("display","none"); //add
+    //modify by luyaqin end==
 
     // if(scrollRequestAnimationFrameIni && Store.scrollRefreshSwitch){
     //     execScroll();

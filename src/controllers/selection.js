@@ -16,6 +16,7 @@ import { replaceHtml, getObjType, luckysheetfontformat } from "../utils/util";
 import Store from "../store";
 import locale from "../locale/locale";
 import imageCtrl from "./imageCtrl";
+import { getRangeValue } from "../global/api";//luyaqin
 
 const selection = {
     clearcopy: function(e) {
@@ -692,6 +693,25 @@ const selection = {
             let minc = Store.luckysheet_select_save[0].column[0], //应用范围首尾列
                 maxc = minc + copyc - 1;
 
+            //若粘贴的区域内有禁止编辑的单元格，则不允许粘贴  add by luyaqin start===
+            let rangeCells = getRangeValue({range:{row:[minh,maxh],column:[minc,maxc]}});
+            let pass = true;
+            for(let i = 0; i < rangeCells.length; i++){
+                for(let j = 0; j < rangeCells[i].length; j++){
+                    if(rangeCells[i][j] && rangeCells[i][j].bg && Store.disabledEditCellBackgroundColor.includes(rangeCells[i][j].bg)){
+                        pass = false;
+                        break;
+                    }
+                }
+                if(!pass){
+                    break;
+                }
+            }
+            if(!pass){
+                return;
+            }
+            //若粘贴的区域内有禁止编辑的单元格，则不允许粘贴  add by luyaqin end===
+
             //应用范围包含部分合并单元格，则return提示
             let has_PartMC = false;
             if (cfg["merge"] != null) {
@@ -750,7 +770,27 @@ const selection = {
                         value = data[h - minh][c - minc];
                     }
 
-                    x[c] = $.extend(true, {}, value);
+                    //保留原单元格样式 只复制值 modify by luyaqin start====
+                    // x[c] = $.extend(true, {}, value);
+                    let format = [
+                        "bg",
+                        "fc",
+                        "ct",
+                        "ht",
+                        "vt",
+                        "bl",
+                        "it",
+                        "cl",
+                        "un",
+                        "fs",
+                        "ff",
+                        "tb",
+                    ];
+                    format.forEach((item) => {
+                        Reflect.deleteProperty(value, item);
+                    });
+                    x[c] = $.extend(true, x[c], value);
+                    //保留原单元格样式 只复制值 modify by luyaqin end====
 
                     if (value != null && "mc" in x[c]) {
                         if (x[c]["mc"].rs != null) {
@@ -956,6 +996,25 @@ const selection = {
         let minc = last["column_focus"],
             maxc = minc + copyc - 1; //应用范围首尾列
 
+        //若粘贴的区域内有禁止编辑的单元格，则不允许粘贴  add by luyaqin start===
+        let rangeCells = getRangeValue({range:{row:[minh,maxh],column:[minc,maxc]}});
+        let pass = true;
+        for(let i = 0; i < rangeCells.length; i++){
+            for(let j = 0; j < rangeCells[i].length; j++){
+                if(rangeCells[i][j] && rangeCells[i][j].bg && Store.disabledEditCellBackgroundColor.includes(rangeCells[i][j].bg)){
+                    pass = false;
+                    break;
+                }
+            }
+            if(!pass){
+                break;
+            }
+        }
+        if(!pass){
+            return;
+        }
+        //若粘贴的区域内有禁止编辑的单元格，则不允许粘贴  add by luyaqin end===
+
         //应用范围包含部分合并单元格，则提示
         let has_PartMC = false;
         if (cfg["merge"] != null) {
@@ -1114,7 +1173,27 @@ const selection = {
                     value = copyData[h - minh][c - minc];
                 }
 
-                x[c] = $.extend(true, {}, value);
+                //保留原单元格样式 只复制值 modify by luyaqin start====
+                // x[c] = $.extend(true, {}, value);
+                let format = [
+                    "bg",
+                    "fc",
+                    "ct",
+                    "ht",
+                    "vt",
+                    "bl",
+                    "it",
+                    "cl",
+                    "un",
+                    "fs",
+                    "ff",
+                    "tb",
+                ];
+                format.forEach((item) => {
+                    Reflect.deleteProperty(value, item);
+                });
+                x[c] = $.extend(true, x[c], value);
+                //保留原单元格样式 只复制值 modify by luyaqin end====
 
                 if (value != null && copyHasMC && "mc" in x[c]) {
                     if (x[c]["mc"].rs != null) {
@@ -1485,6 +1564,25 @@ const selection = {
             maxc = minc + copyc - 1;
         }
 
+        //若粘贴的区域内有禁止编辑的单元格，则不允许粘贴  add by luyaqin start===
+        let rangeCells = getRangeValue({range:{row:[minh,maxh],column:[minc,maxc]}});
+        let pass = true;
+        for(let i = 0; i < rangeCells.length; i++){
+            for(let j = 0; j < rangeCells[i].length; j++){
+                if(rangeCells[i][j] && rangeCells[i][j].bg && Store.disabledEditCellBackgroundColor.includes(rangeCells[i][j].bg)){
+                    pass = false;
+                    break;
+                }
+            }
+            if(!pass){
+                break;
+            }
+        }
+        if(!pass){
+            return;
+        }
+        //若粘贴的区域内有禁止编辑的单元格，则不允许粘贴  add by luyaqin end===
+
         //应用范围包含部分合并单元格，则提示
         let has_PartMC = false;
         if (cfg["merge"] != null) {
@@ -1643,7 +1741,27 @@ const selection = {
                             }
                         }
 
-                        x[c] = $.extend(true, {}, value);
+                       //保留原单元格样式 只复制值 modify by luyaqin start====
+                        // x[c] = $.extend(true, {}, value);
+                        let format = [
+                            "bg",
+                            "fc",
+                            "ct",
+                            "ht",
+                            "vt",
+                            "bl",
+                            "it",
+                            "cl",
+                            "un",
+                            "fs",
+                            "ff",
+                            "tb",
+                        ];
+                        format.forEach((item) => {
+                            Reflect.deleteProperty(value, item);
+                        });
+                        x[c] = $.extend(true, x[c], value);
+                        //保留原单元格样式 只复制值 modify by luyaqin end====
 
                         if (value != null && copyHasMC && "mc" in x[c]) {
                             if (x[c]["mc"].rs != null) {

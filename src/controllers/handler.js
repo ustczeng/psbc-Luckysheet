@@ -3901,12 +3901,14 @@ export default function luckysheetHandler() {
         window.cancelAnimationFrame(Store.jfautoscrollTimeout);
         Store.luckysheet_scroll_status = false;
 
-        $("#luckysheet-cell-selected")
-            .find(".luckysheet-cs-fillhandle")
-            .css("cursor", "crosshair")
-            .end()
-            .find(".luckysheet-cs-draghandle")
-            .css("cursor", "move");
+        //去除样式选区替换、选取下拉填充 modify by luyaqin start===
+        // $("#luckysheet-cell-selected")
+        //     .find(".luckysheet-cs-fillhandle")
+        //     .css("cursor", "crosshair")
+        //     .end()
+        //     .find(".luckysheet-cs-draghandle")
+        //     .css("cursor", "move");
+        //modify by luyaqin end===
         $("#luckysheet-cell-main, #luckysheetTableContent, #luckysheet-sheettable_0").css("cursor", "default");
 
         //行标题窗格主体
@@ -4924,96 +4926,98 @@ export default function luckysheetHandler() {
     //     return;
     // }
 
-    //选区拖动替换
-    $("#luckysheet-cell-main div.luckysheet-cs-draghandle").mousedown(function(event) {
-        if (isEditMode() || Store.allowEdit === false) {
-            //此模式下禁用选区拖动
-            return;
-        }
+    //选区拖动替换 modify by luyaqin  禁止拖动替换 start====
+    // $("#luckysheet-cell-main div.luckysheet-cs-draghandle").mousedown(function(event) {
+    //     if (isEditMode() || Store.allowEdit === false) {
+    //         //此模式下禁用选区拖动
+    //         return;
+    //     }
 
-        $("#luckysheet-cell-selected")
-            .find(".luckysheet-cs-fillhandle")
-            .css("cursor", "move")
-            .end()
-            .find(".luckysheet-cs-draghandle")
-            .css("cursor", "move");
-        $("#luckysheet-cell-main, #luckysheetTableContent, #luckysheet-sheettable_0").css("cursor", "move");
+    //     $("#luckysheet-cell-selected")
+    //         .find(".luckysheet-cs-fillhandle")
+    //         .css("cursor", "move")
+    //         .end()
+    //         .find(".luckysheet-cs-draghandle")
+    //         .css("cursor", "move");
+    //     $("#luckysheet-cell-main, #luckysheetTableContent, #luckysheet-sheettable_0").css("cursor", "move");
 
-        Store.luckysheet_cell_selected_move = true;
-        Store.luckysheet_scroll_status = true;
+    //     Store.luckysheet_cell_selected_move = true;
+    //     Store.luckysheet_scroll_status = true;
 
-        let mouse = mouseposition(event.pageX, event.pageY);
-        let x = mouse[0] + $("#luckysheet-cell-main").scrollLeft();
-        let y = mouse[1] + $("#luckysheet-cell-main").scrollTop();
+    //     let mouse = mouseposition(event.pageX, event.pageY);
+    //     let x = mouse[0] + $("#luckysheet-cell-main").scrollLeft();
+    //     let y = mouse[1] + $("#luckysheet-cell-main").scrollTop();
 
-        let row_location = rowLocation(y),
-            row_pre = row_location[0],
-            row = row_location[1],
-            row_index = row_location[2];
-        let col_location = colLocation(x),
-            col_pre = col_location[0],
-            col = col_location[1],
-            col_index = col_location[2];
+    //     let row_location = rowLocation(y),
+    //         row_pre = row_location[0],
+    //         row = row_location[1],
+    //         row_index = row_location[2];
+    //     let col_location = colLocation(x),
+    //         col_pre = col_location[0],
+    //         col = col_location[1],
+    //         col_index = col_location[2];
 
-        Store.luckysheet_cell_selected_move_index = [row_index, col_index];
+    //     Store.luckysheet_cell_selected_move_index = [row_index, col_index];
 
-        $("#luckysheet-cell-selected-move").css({
-            left: col_pre,
-            width: col - col_pre - 1,
-            top: row_pre,
-            height: row - row_pre - 1,
-            display: "block",
-        });
+    //     $("#luckysheet-cell-selected-move").css({
+    //         left: col_pre,
+    //         width: col - col_pre - 1,
+    //         top: row_pre,
+    //         height: row - row_pre - 1,
+    //         display: "block",
+    //     });
 
-        event.stopPropagation();
-    });
-
+    //     event.stopPropagation();
+    // });
+    //modify by luyaqin  禁止拖动替换 end====
     //选区下拉
     $("#luckysheet-cell-main div.luckysheet-cs-fillhandle")
-        .mousedown(function(event) {
-            if (isEditMode() || Store.allowEdit === false) {
-                //此模式下禁用选区下拉
-                return;
-            }
+    //禁止下拉填充 modify by luyaqin  start====
+        // .mousedown(function(event) {
+        //     if (isEditMode() || Store.allowEdit === false) {
+        //         //此模式下禁用选区下拉
+        //         return;
+        //     }
 
-            $("#luckysheet-cell-selected")
-                .find(".luckysheet-cs-fillhandle")
-                .css("cursor", "crosshair")
-                .end()
-                .find(".luckysheet-cs-draghandle")
-                .css("cursor", "crosshair");
-            $("#luckysheet-cell-main, #luckysheetTableContent, #luckysheet-sheettable_0").css("cursor", "crosshair");
+        //     $("#luckysheet-cell-selected")
+        //         .find(".luckysheet-cs-fillhandle")
+        //         .css("cursor", "crosshair")
+        //         .end()
+        //         .find(".luckysheet-cs-draghandle")
+        //         .css("cursor", "crosshair");
+        //     $("#luckysheet-cell-main, #luckysheetTableContent, #luckysheet-sheettable_0").css("cursor", "crosshair");
 
-            Store.luckysheet_cell_selected_extend_time = setTimeout(function() {
-                Store.luckysheet_cell_selected_extend = true;
-                Store.luckysheet_scroll_status = true;
+        //     Store.luckysheet_cell_selected_extend_time = setTimeout(function() {
+        //         Store.luckysheet_cell_selected_extend = true;
+        //         Store.luckysheet_scroll_status = true;
 
-                let mouse = mouseposition(event.pageX, event.pageY);
-                let x = mouse[0] + $("#luckysheet-cell-main").scrollLeft() - 5;
-                let y = mouse[1] + $("#luckysheet-cell-main").scrollTop() - 5;
+        //         let mouse = mouseposition(event.pageX, event.pageY);
+        //         let x = mouse[0] + $("#luckysheet-cell-main").scrollLeft() - 5;
+        //         let y = mouse[1] + $("#luckysheet-cell-main").scrollTop() - 5;
 
-                let row_location = rowLocation(y),
-                    row_pre = row_location[0],
-                    row = row_location[1],
-                    row_index = row_location[2];
-                let col_location = colLocation(x),
-                    col_pre = col_location[0],
-                    col = col_location[1],
-                    col_index = col_location[2];
+        //         let row_location = rowLocation(y),
+        //             row_pre = row_location[0],
+        //             row = row_location[1],
+        //             row_index = row_location[2];
+        //         let col_location = colLocation(x),
+        //             col_pre = col_location[0],
+        //             col = col_location[1],
+        //             col_index = col_location[2];
 
-                Store.luckysheet_cell_selected_extend_index = [row_index, col_index];
+        //         Store.luckysheet_cell_selected_extend_index = [row_index, col_index];
 
-                $("#luckysheet-cell-selected-extend").css({
-                    left: col_pre,
-                    width: col - col_pre - 1,
-                    top: row_pre,
-                    height: row - row_pre - 1,
-                    display: "block",
-                });
-            }, 100);
+        //         $("#luckysheet-cell-selected-extend").css({
+        //             left: col_pre,
+        //             width: col - col_pre - 1,
+        //             top: row_pre,
+        //             height: row - row_pre - 1,
+        //             display: "block",
+        //         });
+        //     }, 100);
 
-            event.stopPropagation();
-        })
+        //     event.stopPropagation();
+        // })
+         //禁止下拉填充 modify by luyaqin  end====
         .click(function() {
             clearTimeout(Store.luckysheet_cell_selected_extend_time);
             event.stopPropagation();
