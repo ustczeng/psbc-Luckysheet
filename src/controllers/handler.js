@@ -1209,6 +1209,12 @@ export default function luckysheetHandler() {
 
             luckysheetContainerFocus();
 
+            //点击鼠标右键不触发cellMousedown  modify by luyaqin  start====
+            if(event.which == "3"){
+                return;
+            }
+            //===end===
+
             method.createHookFunction(
                 "cellMousedown",
                 Store.flowdata[row_index][col_index],
@@ -1262,7 +1268,7 @@ export default function luckysheetHandler() {
                 $$("#luckysheet-cols-rows-handleincell .luckysheet-menuseparator").style.display = "block";
 
                 if (obj_s["row"] != null && obj_s["row"][0] == 0 && obj_s["row"][1] == Store.flowdata.length - 1) {
-                    // 如果全部按钮都隐藏，则整个菜单容器也要隐藏
+                    // 如果全部按钮都隐藏，则整个菜单容器也要隐藏 新增自定义菜单customs判断 modify by luyaqin ===
                     if (
                         !cellRightClickConfig.copy &&
                         !cellRightClickConfig.copyAs &&
@@ -1279,7 +1285,7 @@ export default function luckysheetHandler() {
                         !cellRightClickConfig.image &&
                         !cellRightClickConfig.link &&
                         !cellRightClickConfig.data &&
-                        !cellRightClickConfig.cellFormat
+                        !cellRightClickConfig.cellFormat && !cellRightClickConfig.customs
                     ) {
                         return;
                     }
@@ -1378,7 +1384,7 @@ export default function luckysheetHandler() {
                     obj_s["column"][0] == 0 &&
                     obj_s["column"][1] == Store.flowdata[0].length - 1
                 ) {
-                    // 如果全部按钮都隐藏，则整个菜单容器也要隐藏
+                    // 如果全部按钮都隐藏，则整个菜单容器也要隐藏  新增自定义菜单customs判断 modify by luyaqin ===
                     if (
                         !cellRightClickConfig.copy &&
                         !cellRightClickConfig.copyAs &&
@@ -1395,7 +1401,7 @@ export default function luckysheetHandler() {
                         !cellRightClickConfig.image &&
                         !cellRightClickConfig.link &&
                         !cellRightClickConfig.data &&
-                        !cellRightClickConfig.cellFormat
+                        !cellRightClickConfig.cellFormat && !cellRightClickConfig.customs
                     ) {
                         return;
                     }
@@ -1489,7 +1495,7 @@ export default function luckysheetHandler() {
                             .val("");
                     }
                 } else {
-                    // 如果全部按钮都隐藏，则整个菜单容器也要隐藏
+                     // 如果全部按钮都隐藏，则整个菜单容器也要隐藏  新增自定义菜单customs判断 modify by luyaqin ===
                     if (
                         !cellRightClickConfig.copy &&
                         !cellRightClickConfig.copyAs &&
@@ -1507,7 +1513,7 @@ export default function luckysheetHandler() {
                         !cellRightClickConfig.image &&
                         !cellRightClickConfig.link &&
                         !cellRightClickConfig.data &&
-                        !cellRightClickConfig.cellFormat
+                        !cellRightClickConfig.cellFormat && !cellRightClickConfig.customs
                     ) {
                         return;
                     }
@@ -1538,7 +1544,7 @@ export default function luckysheetHandler() {
                     }
                 }
 
-                // 当一个功能菜单块内所有的按钮都隐藏的时候，它顶部的分割线也需要隐藏掉
+                // 当一个功能菜单块内所有的按钮都隐藏的时候，它顶部的分割线也需要隐藏掉 新增自定义菜单customs判断 modify by luyaqin ===
                 if (
                     !cellRightClickConfig.clear &&
                     !cellRightClickConfig.matrix &&
@@ -1548,7 +1554,7 @@ export default function luckysheetHandler() {
                     !cellRightClickConfig.image &&
                     !cellRightClickConfig.link &&
                     !cellRightClickConfig.data &&
-                    !cellRightClickConfig.cellFormat
+                    !cellRightClickConfig.cellFormat && !cellRightClickConfig.customs
                 ) {
                     $$("#luckysheet-cols-rows-data .luckysheet-menuseparator").style.display = "none";
                 }
