@@ -490,7 +490,17 @@ function getCellTextInfo(cell , ctx, option){
         underLine = checkstatusByCell(cell ,"un");//underLine
         fontSize = checkstatusByCell(cell ,"fs");
 
-        if(cell instanceof Object){
+        //在使用iframe时，不建议使用instanceof来检查iframe内部对象的方式，因为跨域限制会导致instanceof始终返回false。modify by luyaqin start===
+        // if(cell instanceof Object){
+        //     value = cell.m;
+        //     if(value == null){
+        //         value = cell.v;
+        //     }
+        // }
+        // else{
+        //     value = cell;
+        // }
+        if(cell){
             value = cell.m;
             if(value == null){
                 value = cell.v;
@@ -499,6 +509,7 @@ function getCellTextInfo(cell , ctx, option){
         else{
             value = cell;
         }
+        //modify by luyaqin end===
 
         if(isRealNull(value)){
             return null;
