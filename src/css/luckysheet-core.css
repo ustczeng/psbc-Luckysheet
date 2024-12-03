@@ -1872,7 +1872,7 @@ body:not(.ewa-ipad) .luckysheet-rows-h-cell-sel:hover {
     /*border:1px solid #fff;*/
     margin: 0px 0 0 0px;
     background: rgba(0, 80, 208, 0.15);
-    display: none;
+    display: none !important; /*luyaqin 加了个!important */
     /*transition: all 0.1s;*/
 }
 
@@ -2043,14 +2043,16 @@ body:not(.ewa-ipad) .luckysheet-rows-h-cell-sel:hover {
     z-index: 15;
     border: 1px solid #0188fb;
     margin: -1px 0 0 -1px;
-    background: rgba(1, 136, 251, 0.15);
+    /*background: rgba(1, 136, 251, 0.15); luyaqin*/
+    background: transparent;
     display: none;
     /*transition: all 0.1s;*/
 }
 
 .luckysheet-cs-inner-border {
     pointer-events: none;
-    border: 1px solid #fff;
+    /*border: 1px solid #fff; luyaqin*/
+    border: 1px solid #0188fb;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -2065,7 +2067,8 @@ body:not(.ewa-ipad) .luckysheet-rows-h-cell-sel:hover {
     bottom: -5px;
     cursor: crosshair;
     background-color: #0188fb;
-    border: solid 1px #fff;
+    /*border: solid 1px #fff; luyaqin*/
+    border: solid 1px #0188fb;
     z-index: 16;
     pointer-events: auto;
     right: -5px;
