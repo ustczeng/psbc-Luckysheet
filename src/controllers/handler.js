@@ -1544,21 +1544,6 @@ export default function luckysheetHandler() {
                     }
                 }
 
-                // 当一个功能菜单块内所有的按钮都隐藏的时候，它顶部的分割线也需要隐藏掉 新增自定义菜单customs判断 modify by luyaqin ===
-                if (
-                    !cellRightClickConfig.clear &&
-                    !cellRightClickConfig.matrix &&
-                    !cellRightClickConfig.sort &&
-                    !cellRightClickConfig.filter &&
-                    !cellRightClickConfig.chart &&
-                    !cellRightClickConfig.image &&
-                    !cellRightClickConfig.link &&
-                    !cellRightClickConfig.data &&
-                    !cellRightClickConfig.cellFormat && !cellRightClickConfig.customs
-                ) {
-                    $$("#luckysheet-cols-rows-data .luckysheet-menuseparator").style.display = "none";
-                }
-
                 //根据单元格的自定义属性判断是否显示自定义右键菜单功能 modify luyaqin start
                 let cellvalue = getRangeValue()[0][0]
                 if(cellRightClickConfig.customs){
@@ -1572,6 +1557,24 @@ export default function luckysheetHandler() {
 
                 }
                 //modify luyaqin end
+
+                // 当一个功能菜单块内所有的按钮都隐藏的时候，它顶部的分割线也需要隐藏掉 新增自定义菜单customs判断 modify by luyaqin ===
+                let customDOM = $('.luckysheetColsRowsHandleAdd_custom').filter(function() {
+                    return $(this).css('display') === 'block';
+                })
+                if (
+                    !cellRightClickConfig.clear &&
+                    !cellRightClickConfig.matrix &&
+                    !cellRightClickConfig.sort &&
+                    !cellRightClickConfig.filter &&
+                    !cellRightClickConfig.chart &&
+                    !cellRightClickConfig.image &&
+                    !cellRightClickConfig.link &&
+                    !cellRightClickConfig.data &&
+                    !cellRightClickConfig.cellFormat && customDOM.length == 0
+                ) {
+                    $$("#luckysheet-cols-rows-data .luckysheet-menuseparator").style.display = "none";
+                }
 
                 showrightclickmenu($("#luckysheet-rightclick-menu"), x, y);
             }
