@@ -855,6 +855,52 @@ function luckysheetextendtable(type, index, value, direction, sheetIndex) {
         }
     }
 
+    //插入行复制单元格格式 add by luyaqin start====
+    if(type == 'row'){
+        let format = [
+            "ct",
+            "bg",
+            "ff",
+            "fc",
+            "fs",
+            "bl",
+            "it",
+            "cl",
+            "un",
+            "vt",
+            "ht",
+            "tb",
+        ];
+        if(direction == 'lefttop'){
+            for(let len = 0; len < value; len++ ){
+                for (let c = 0; c < d[index+value].length; c++) {
+                    if(d[index + value][c]){
+                        d[index + len][c] = {};
+                        format.forEach((item) => {
+                            if(d[index + value][c].hasOwnProperty(item)){
+                                d[index + len][c][item] = d[index + value][c][item];
+                            }
+                        }); 
+                    }
+                }
+            }
+        }else{
+            for(let len = 0; len < value; len++ ){
+                for (let c = 0; c < d[index].length; c++) {
+                    if(d[index][c]){
+                        d[index + len + 1][c] = {};
+                        format.forEach((item) => {
+                            if(d[index][c].hasOwnProperty(item)){
+                                d[index + len + 1][c][item] = d[index][c][item];
+                            }
+                        });
+                    }
+                }
+            }
+        }
+    }
+    //插入行复制单元格格式 add by luyaqin end====
+
     // 修改当前sheet页时刷新
     if (file.index == Store.currentSheetIndex) {
         jfrefreshgrid_adRC(
