@@ -1559,6 +1559,20 @@ export default function luckysheetHandler() {
                     $$("#luckysheet-cols-rows-data .luckysheet-menuseparator").style.display = "none";
                 }
 
+                //根据单元格的自定义属性判断是否显示自定义右键菜单功能 modify luyaqin start
+                let cellvalue = getRangeValue()[0][0]
+                if(cellRightClickConfig.customs){
+                    for(let i = 0; i < cellRightClickConfig.customs.length; i++){
+                        if(cellvalue && cellvalue.customKey && cellvalue.customKey[cellRightClickConfig.customs[i].code]){
+                            $("#luckysheet-rightclick-menu").find(`[data-code="${cellRightClickConfig.customs[i].code}"]`)[0].style.display = "block";
+                        }else{
+                            $("#luckysheet-rightclick-menu").find(`[data-code="${cellRightClickConfig.customs[i].code}"]`)[0].style.display = "none";
+                        }
+                    }
+
+                }
+                //modify luyaqin end
+
                 showrightclickmenu($("#luckysheet-rightclick-menu"), x, y);
             }
 
