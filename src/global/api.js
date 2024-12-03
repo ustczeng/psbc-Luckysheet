@@ -2939,12 +2939,15 @@ export function setSingleRangeFormat(attr, value, options = {}) {
 
     for (let r = range.row[0]; r <= range.row[1]; r++) {
         for (let c = range.column[0]; c <= range.column[1]; c++) {
-            console.log('r',r);
-            console.log('c',c);
-            setCellValue(r, c, {[attr]: value}, {
-                order: order,
-                isRefresh: false,
-              })
+            //modify by luyaqin 解决使用setRangeFormat批量更新单元格样式会触发cellUpdated，用setCellFormat代替setCellValue  start====
+            // console.log('r',r);
+            // console.log('c',c);
+            // setCellValue(r, c, {[attr]: value}, {
+            //     order: order,
+            //     isRefresh: false,
+            //   })
+            setCellFormat(r, c, attr, value)
+             //modify by luyaqin end====
         }
     }
 }
