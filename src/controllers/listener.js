@@ -5,7 +5,7 @@ import {createProxy} from '../utils/util';
 import Store from '../store/index';
 import method from '../global/method';
 import { getluckysheetfile } from '../methods/get'
-import { toJson } from '../global/api';
+import { toJson,setRangeShow } from '../global/api';//add by luyaqin  解决初始化luckysheet默认选中第一个单元格
 
 let undoTimer,redoTimer;
 function undoAccessible(len) {
@@ -38,6 +38,7 @@ const initListener = function(){
 
     createProxy(Store, 'asyncLoad', (target, property, val, receiver)=>{
         if(property === 'length' && val === 0){
+            setRangeShow([], { show: false }) //add by luyaqin  解决初始化luckysheet默认选中第一个单元格
             method.createHookFunction('workbookCreateAfter', toJson())
         }
     })
