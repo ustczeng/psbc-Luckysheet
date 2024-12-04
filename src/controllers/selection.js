@@ -698,7 +698,7 @@ const selection = {
             let pass = true;
             for(let i = 0; i < rangeCells.length; i++){
                 for(let j = 0; j < rangeCells[i].length; j++){
-                    if(rangeCells[i][j] && rangeCells[i][j].bg && Store.disabledEditCellBackgroundColor.includes(rangeCells[i][j].bg)){
+                    if(rangeCells[i][j] && rangeCells[i][j].bg && Store.disabledEditCellBackgroundColor && Store.disabledEditCellBackgroundColor.includes(rangeCells[i][j].bg)){
                         pass = false;
                         break;
                     }
@@ -1001,7 +1001,7 @@ const selection = {
         let pass = true;
         for(let i = 0; i < rangeCells.length; i++){
             for(let j = 0; j < rangeCells[i].length; j++){
-                if(rangeCells[i][j] && rangeCells[i][j].bg && Store.disabledEditCellBackgroundColor.includes(rangeCells[i][j].bg)){
+                if(rangeCells[i][j] && rangeCells[i][j].bg && Store.disabledEditCellBackgroundColor && Store.disabledEditCellBackgroundColor.includes(rangeCells[i][j].bg)){
                     pass = false;
                     break;
                 }
@@ -1569,7 +1569,7 @@ const selection = {
         let pass = true;
         for(let i = 0; i < rangeCells.length; i++){
             for(let j = 0; j < rangeCells[i].length; j++){
-                if(rangeCells[i][j] && rangeCells[i][j].bg && Store.disabledEditCellBackgroundColor.includes(rangeCells[i][j].bg)){
+                if(rangeCells[i][j] && rangeCells[i][j].bg && Store.disabledEditCellBackgroundColor && Store.disabledEditCellBackgroundColor.includes(rangeCells[i][j].bg)){
                     pass = false;
                     break;
                 }

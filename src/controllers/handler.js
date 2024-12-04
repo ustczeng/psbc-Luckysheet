@@ -1597,7 +1597,7 @@ export default function luckysheetHandler() {
             if(rangeValue != null) {
                 console.info("rangeValue",getRangeValue())
                 console.info("disabledEditCellBackgroundColor",Store)
-                if(Store.disabledEditCellBackgroundColor.includes(rangeValue.bg)) {
+                if(Store.disabledEditCellBackgroundColor && Store.disabledEditCellBackgroundColor.includes(rangeValue.bg)) {
                     return;
                 }
             }

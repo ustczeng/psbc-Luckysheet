@@ -275,7 +275,7 @@ export function keyboardInitial(){
         // 根据单元格背景色，判断是否禁止单元格编辑 modify by luyaqin start===== 
         const rangeValue = getRangeValue()[0][0];
         if(rangeValue != null) {
-            if(Store.disabledEditCellBackgroundColor.includes(rangeValue.bg)) {
+            if(Store.disabledEditCellBackgroundColor && Store.disabledEditCellBackgroundColor.includes(rangeValue.bg)) {
                 return;
             }
         }
