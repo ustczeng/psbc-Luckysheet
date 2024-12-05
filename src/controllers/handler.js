@@ -338,7 +338,18 @@ export default function luckysheetHandler() {
             let luckysheetTableContent = $("#luckysheetTableContent")
                 .get(0)
                 .getContext("2d");
-
+            //点击空白处单元格失去焦点 add luyaqin start==
+            if(colLocation(x).length == 0){
+                //如果是单元格编辑模式 则退出编辑模式
+                if (
+                    parseInt($("#luckysheet-input-box").css("top")) > 0
+                ) {
+                    formula.updatecell(Store.luckysheetCellUpdate[0], Store.luckysheetCellUpdate[1]);
+                }
+                setRangeShow([],{show:false})
+                return
+            }
+            //点击空白处单元格失去焦点 add luyaqin end==
             let row_location = rowLocation(y),
                 row = row_location[1],
                 row_pre = row_location[0],
