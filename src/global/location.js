@@ -58,6 +58,11 @@ function colSpanLocationByIndex(col_index, span){
 
 function colLocation(x) {
     let col_index = luckysheet_searcharray(Store.visibledatacolumn, x);
+    //点击空白处单元格失去焦点 add luyaqin start==
+    if(col_index == -1){
+        return []
+    }
+    //点击空白处单元格失去焦点 add luyaqin end==
 
     if (col_index == -1 && x > 0) {
         col_index = Store.visibledatacolumn.length - 1;
